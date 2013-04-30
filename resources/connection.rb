@@ -1,4 +1,4 @@
-actions :configure
+actions :install, :configure
 
 attribute :access_key_id, :kind_of => String
 attribute :secret_access_key, :kind_of => String
