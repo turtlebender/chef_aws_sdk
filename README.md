@@ -1,59 +1,59 @@
 aws_sdk Cookbook
 ================
-TODO: Enter the cookbook description here.
 
-e.g.
-This cookbook makes your favorite breakfast sandwhich.
+This is designed to make using the aws-sdk libraries easier from within
+a chef cookbook. Most of what is here is here for historical reasons,
+since the right_aws gem can do most of the same tasks
 
-Requirements
-------------
-TODO: List your cookbook requirements. Be sure to include any requirements this cookbook has on platforms, libraries, other cookbooks, packages, operating systems, etc.
+The cookbook supplies two resource providers (ATM):
 
-e.g.
-#### packages
-- `toaster` - aws_sdk needs toaster to brown your bagel.
+aws_connection
 
-Attributes
-----------
-TODO: List you cookbook attributes here.
+and
 
-e.g.
-#### aws_sdk::default
-<table>
-  <tr>
-    <th>Key</th>
-    <th>Type</th>
-    <th>Description</th>
-    <th>Default</th>
-  </tr>
-  <tr>
-    <td><tt>['aws_sdk']['bacon']</tt></td>
-    <td>Boolean</td>
-    <td>whether to include bacon</td>
-    <td><tt>true</tt></td>
-  </tr>
-</table>
+s3_file
 
-Usage
------
-#### aws_sdk::default
-TODO: Write usage instructions for each cookbook.
+aws_connection
+--------------
 
-e.g.
-Just include `aws_sdk` in your node's `run_list`:
+aws_connection provides the boilerplate code for connecting up with the
+aws apis.
 
-```json
-{
-  "name":"my_node",
-  "run_list": [
-    "recipe[aws_sdk]"
-  ]
-}
-```
+To use it, you can either provide credentials like this:
+
+aws_connection 'base' do
+  action :install, :configure
+  access_key_id <MyAccessKeyID>
+  secret_access_key <MySecretAccesKey>
+end
+
+and it will connect to aws using the supplied credentials, or, if you
+are running on an ec2 instance with an instance profile role, you can
+just leave the credentials out:
+
+aws_connection 'base' do
+  action :install, :configure
+end
+
+and the instance profile will be used to connect.
+
+
+s3_file
+--------
+
+At the moment, only downloading a file is supported. The s3_file
+provider assumes that the aws connection has already been configured.
+
+aws_sdk_s3_file '/opt/packages/mypackage.tar.gz' do
+  action :download
+  bucket 'mybucket'
+  key 'mypackage.tar.gz'
+end
+
+The file will be stored at the name attribute
 
 Contributing
 ------------
-TODO: (optional) If this is a public cookbook, detail the process for contributing. If this is a private cookbook, remove this section.
 
 e.g.
 1. Fork the repository on Github
@@ -65,4 +65,4 @@ e.g.
 
 License and Authors
 -------------------
-Authors: TODO: List authors
+Authors: Tom Howe
