@@ -1,6 +1,6 @@
 name             'aws_sdk'
-maintainer       'YOUR_COMPANY_NAME'
-maintainer_email 'YOUR_EMAIL'
+maintainer       'Tom Howe'
+maintainer_email 'turtlebender@gmail.com'
 license          'All rights reserved'
 description      'Installs/Configures aws_sdk'
 long_description IO.read(File.join(File.dirname(__FILE__), 'README.md'))
