@@ -1,9 +1,9 @@
 actions :download
 
-attribute :bucket, :type => String, :required => true
-attribute :key, :type => String, :required => true
-attribute :path, :type => String, :required => true, :name_attribute => true
-attribute :owner, :type => String
-attribute :group, :type => String
+attribute :bucket, :kind_of => String, :required => true
+attribute :key, :kind_of => String, :required => true
+attribute :name, :kind_of => String, :required => true, :name_attribute => true
+attribute :owner, :kind_of => String
+attribute :group, :kind_of => String
 
 default_action :download

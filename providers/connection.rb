@@ -4,6 +4,10 @@ def _install
     install_package.run_action :install
   end
 
+  chef_gem 'aws-s3' do
+    action :remove
+  end
+
   chef_gem 'aws-sdk' do
     action :install
   end
@@ -18,10 +22,11 @@ action :configure do
   _install
   require "aws"
 
+  config = {}
   if @new_resource.access_key_id && @new_resource.secret_access_key
     config[:access_key_id] = @new_resource.access_key_id
     config[:secret_access_key] = @new_resource.secret_access_key
   end
 
-  AWS::Config(config)
+  AWS.config(config)
 end
