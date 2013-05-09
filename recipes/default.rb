@@ -7,6 +7,6 @@
 # All rights reserved - Do Not Redistribute
 #
 
-aws_sdk_connection do
+aws_sdk_connection 'base' do
   action :install
 end
